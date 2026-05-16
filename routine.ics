@@ -1,0 +1,322 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//DayFocus//Routine Feed//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Day Focus Routine
+X-WR-TIMEZONE:Europe/London
+X-PUBLISHED-TTL:PT1H
+REFRESH-INTERVAL;VALUE=DURATION:PT1H
+BEGIN:VEVENT
+UID:df-wd-01@dayfocus
+DTSTART;TZID=Europe/London:20250519T073000
+DTEND;TZID=Europe/London:20250519T074000
+SUMMARY:Wake + light exposure
+DESCRIPTION:Open curtains or step outside 5 min — anchors your circadian rhythm and mood
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-02@dayfocus
+DTSTART;TZID=Europe/London:20250519T074000
+DTEND;TZID=Europe/London:20250519T075000
+SUMMARY:Hydrate
+DESCRIPTION:Large glass of water before anything else
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-03@dayfocus
+DTSTART;TZID=Europe/London:20250519T080000
+DTEND;TZID=Europe/London:20250519T082000
+SUMMARY:Breakfast
+DESCRIPTION:Proper meal — blood sugar stability is mood stability
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-04@dayfocus
+DTSTART;TZID=Europe/London:20250519T082000
+DTEND;TZID=Europe/London:20250519T090000
+SUMMARY:Movement (20 min)
+DESCRIPTION:Walk, jog, yoga or stretching — dopamine boost before the day starts
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-05@dayfocus
+DTSTART;TZID=Europe/London:20250519T090000
+DTEND;TZID=Europe/London:20250519T094500
+SUMMARY:Job search — applications (45 min)
+DESCRIPTION:Apply to 2-3 roles with tailored cover letters. Timer on. Quality over quantity.
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-06@dayfocus
+DTSTART;TZID=Europe/London:20250519T094500
+DTEND;TZID=Europe/London:20250519T095500
+SUMMARY:Short break
+DESCRIPTION:5-10 min away from screen — walk around, snack, breathe
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-07@dayfocus
+DTSTART;TZID=Europe/London:20250519T100000
+DTEND;TZID=Europe/London:20250519T104500
+SUMMARY:Job search — LinkedIn + research (45 min)
+DESCRIPTION:Connect with people in your field, research companies, respond to recruiters
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-08@dayfocus
+DTSTART;TZID=Europe/London:20250519T104500
+DTEND;TZID=Europe/London:20250519T105500
+SUMMARY:Break + reset
+DESCRIPTION:Away from screen — short walk outside if possible
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-09@dayfocus
+DTSTART;TZID=Europe/London:20250519T110000
+DTEND;TZID=Europe/London:20250519T114500
+SUMMARY:CV / skills work (45 min)
+DESCRIPTION:Tailor your CV, write cover letters, work on portfolio or LinkedIn profile
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-10@dayfocus
+DTSTART;TZID=Europe/London:20250519T115000
+DTEND;TZID=Europe/London:20250519T120000
+SUMMARY:Morning review (5 min)
+DESCRIPTION:What did you apply for? What needs following up? Write it down.
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-prep@dayfocus
+DTSTART;TZID=Europe/London:20250519T120000
+DTEND;TZID=Europe/London:20250519T120500
+SUMMARY:PrEP
+DESCRIPTION:Take PrEP with food or a snack — same time every day
+RRULE:FREQ=DAILY
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-11@dayfocus
+DTSTART;TZID=Europe/London:20250519T121500
+DTEND;TZID=Europe/London:20250519T130000
+SUMMARY:Lunch — away from screen
+DESCRIPTION:Full 30-45 min break. No job searching. Eat properly and step away.
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-12@dayfocus
+DTSTART;TZID=Europe/London:20250519T130000
+DTEND;TZID=Europe/London:20250519T132000
+SUMMARY:Rest / quiet time (20 min)
+DESCRIPTION:Lie down, listen to something calm — resets your nervous system for the afternoon
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-13@dayfocus
+DTSTART;TZID=Europe/London:20250519T133000
+DTEND;TZID=Europe/London:20250519T141500
+SUMMARY:Calls + networking (45 min)
+DESCRIPTION:Reach out to contacts, follow up on applications, call recruitment agencies
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-14@dayfocus
+DTSTART;TZID=Europe/London:20250519T141500
+DTEND;TZID=Europe/London:20250519T150000
+SUMMARY:Skill building (45 min)
+DESCRIPTION:Course, tutorial, or practice — anything that makes you a stronger candidate
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-15@dayfocus
+DTSTART;TZID=Europe/London:20250519T150000
+DTEND;TZID=Europe/London:20250519T152000
+SUMMARY:Movement break — outside
+DESCRIPTION:15-20 min walk. Fresh air resets your nervous system for the second half of the day.
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-16@dayfocus
+DTSTART;TZID=Europe/London:20250519T153000
+DTEND;TZID=Europe/London:20250519T163000
+SUMMARY:Admin + follow-ups
+DESCRIPTION:Reply to emails, chase applications, update your job tracker
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-17@dayfocus
+DTSTART;TZID=Europe/London:20250519T163000
+DTEND;TZID=Europe/London:20250519T170000
+SUMMARY:End of work — daily job log (5 min)
+DESCRIPTION:Log: applied to X, heard back from Y, tomorrow's priority is Z. Keeps momentum.
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-18@dayfocus
+DTSTART;TZID=Europe/London:20250519T170000
+DTEND;TZID=Europe/London:20250519T173000
+SUMMARY:Screen sunset — work done
+DESCRIPTION:Job search is finished for today. Close the laptop. You've done your work.
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-19@dayfocus
+DTSTART;TZID=Europe/London:20250519T173000
+DTEND;TZID=Europe/London:20250519T183000
+SUMMARY:Free time — something you enjoy
+DESCRIPTION:Hobby, walk, friends, TV — you've earned unstructured time
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-20@dayfocus
+DTSTART;TZID=Europe/London:20250519T183000
+DTEND;TZID=Europe/London:20250519T193000
+SUMMARY:Dinner
+DESCRIPTION:Eat properly — lithium at 20:00 needs food in your stomach
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-21@dayfocus
+DTSTART;TZID=Europe/London:20250519T193000
+DTEND;TZID=Europe/London:20250519T200000
+SUMMARY:Daily review (5 min)
+DESCRIPTION:3 things that went well today, 1 job task for tomorrow
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-evemeds@dayfocus
+DTSTART;TZID=Europe/London:20250519T200000
+DTEND;TZID=Europe/London:20250519T200500
+SUMMARY:Evening meds — lithium + olanzapine + promethazine
+DESCRIPTION:Take all three with food or milk. Lights out at 21:30.
+RRULE:FREQ=DAILY
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-22@dayfocus
+DTSTART;TZID=Europe/London:20250519T210000
+DTEND;TZID=Europe/London:20250519T213000
+SUMMARY:Wind-down ritual
+DESCRIPTION:Bath or shower, dim lights, reading only — no screens, no job sites
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-wd-23@dayfocus
+DTSTART;TZID=Europe/London:20250519T213000
+DTEND;TZID=Europe/London:20250519T220000
+SUMMARY:Lights out
+DESCRIPTION:Consistent sleep time is the #1 mood stabiliser for bipolar — protect this every night
+RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+END:VEVENT
+BEGIN:VEVENT
+UID:df-we-01@dayfocus
+DTSTART;TZID=Europe/London:20250517T073000
+DTEND;TZID=Europe/London:20250517T074000
+SUMMARY:Wake + light exposure
+DESCRIPTION:Same wake time as weekdays — the anchor that keeps bipolar mood stable
+RRULE:FREQ=WEEKLY;BYDAY=SA,SU
+END:VEVENT
+BEGIN:VEVENT
+UID:df-we-02@dayfocus
+DTSTART;TZID=Europe/London:20250517T074000
+DTEND;TZID=Europe/London:20250517T075000
+SUMMARY:Hydrate
+DESCRIPTION:Water first, every day
+RRULE:FREQ=WEEKLY;BYDAY=SA,SU
+END:VEVENT
+BEGIN:VEVENT
+UID:df-we-03@dayfocus
+DTSTART;TZID=Europe/London:20250517T080000
+DTEND;TZID=Europe/London:20250517T090000
+SUMMARY:Slow breakfast
+DESCRIPTION:Enjoy it — no rush. Weekend mornings are the reward for keeping the routine.
+RRULE:FREQ=WEEKLY;BYDAY=SA,SU
+END:VEVENT
+BEGIN:VEVENT
+UID:df-we-04@dayfocus
+DTSTART;TZID=Europe/London:20250517T090000
+DTEND;TZID=Europe/London:20250517T094500
+SUMMARY:Longer movement (30-45 min)
+DESCRIPTION:Park walk, swim, cycle — enjoyable movement, not a workout obligation
+RRULE:FREQ=WEEKLY;BYDAY=SA,SU
+END:VEVENT
+BEGIN:VEVENT
+UID:df-we-05@dayfocus
+DTSTART;TZID=Europe/London:20250517T103000
+DTEND;TZID=Europe/London:20250517T120000
+SUMMARY:Something you genuinely enjoy
+DESCRIPTION:Hobby, socialising, creative project — ADHD thrives on novelty and interest
+RRULE:FREQ=WEEKLY;BYDAY=SA,SU
+END:VEVENT
+BEGIN:VEVENT
+UID:df-we-06@dayfocus
+DTSTART;TZID=Europe/London:20250517T121500
+DTEND;TZID=Europe/London:20250517T130000
+SUMMARY:Lunch
+DESCRIPTION:Proper meal, even on weekends
+RRULE:FREQ=WEEKLY;BYDAY=SA,SU
+END:VEVENT
+BEGIN:VEVENT
+UID:df-we-07@dayfocus
+DTSTART;TZID=Europe/London:20250517T130000
+DTEND;TZID=Europe/London:20250517T140000
+SUMMARY:Afternoon rest
+DESCRIPTION:Nap, read, lie down — recharging is not lazy, it's essential
+RRULE:FREQ=WEEKLY;BYDAY=SA,SU
+END:VEVENT
+BEGIN:VEVENT
+UID:df-we-08@dayfocus
+DTSTART;TZID=Europe/London:20250517T140000
+DTEND;TZID=Europe/London:20250517T150000
+SUMMARY:Light job search (1 hour max)
+DESCRIPTION:Weekend is not for full job searching — 1 hour of light research or LinkedIn only
+RRULE:FREQ=WEEKLY;BYDAY=SA,SU
+END:VEVENT
+BEGIN:VEVENT
+UID:df-we-09@dayfocus
+DTSTART;TZID=Europe/London:20250517T150000
+DTEND;TZID=Europe/London:20250517T152000
+SUMMARY:Get outside
+DESCRIPTION:Fresh air and light — even 20 min prevents afternoon low mood
+RRULE:FREQ=WEEKLY;BYDAY=SA,SU
+END:VEVENT
+BEGIN:VEVENT
+UID:df-we-10@dayfocus
+DTSTART;TZID=Europe/London:20250517T160000
+DTEND;TZID=Europe/London:20250517T173000
+SUMMARY:Free time
+DESCRIPTION:No obligations. Social plans, hobbies, rest — you decide.
+RRULE:FREQ=WEEKLY;BYDAY=SA,SU
+END:VEVENT
+BEGIN:VEVENT
+UID:df-we-11@dayfocus
+DTSTART;TZID=Europe/London:20250517T173000
+DTEND;TZID=Europe/London:20250517T183000
+SUMMARY:Screen sunset
+DESCRIPTION:Warm lighting, reduce blue light — wind-down clock starts
+RRULE:FREQ=WEEKLY;BYDAY=SA,SU
+END:VEVENT
+BEGIN:VEVENT
+UID:df-we-12@dayfocus
+DTSTART;TZID=Europe/London:20250517T183000
+DTEND;TZID=Europe/London:20250517T200000
+SUMMARY:Dinner
+DESCRIPTION:Eat properly even if going out — protect meds timing around social plans
+RRULE:FREQ=WEEKLY;BYDAY=SA,SU
+END:VEVENT
+BEGIN:VEVENT
+UID:df-we-13@dayfocus
+DTSTART;TZID=Europe/London:20250517T210000
+DTEND;TZID=Europe/London:20250517T213000
+SUMMARY:Wind-down ritual
+DESCRIPTION:Even after a social evening — bath, dim lights, no screens
+RRULE:FREQ=WEEKLY;BYDAY=SA,SU
+END:VEVENT
+BEGIN:VEVENT
+UID:df-we-14@dayfocus
+DTSTART;TZID=Europe/London:20250517T213000
+DTEND;TZID=Europe/London:20250517T220000
+SUMMARY:Lights out
+DESCRIPTION:Yes, even on Saturday. Sleep consistency beats everything else.
+RRULE:FREQ=WEEKLY;BYDAY=SA,SU
+END:VEVENT
+END:VCALENDAR
