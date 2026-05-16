@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Day Focus">
+<meta name="theme-color" content="#f7f6f2">
+<title>Day Focus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --g: #1a9e70;
+  --g-l: #e4f5ee;
+  --g-d: #0a5c3f;
+  --amber: #c47b12;
+  --amber-l: #fdf0d8;
+  --coral: #c0402a;
+  --coral-l: #fceae6;
+  --blue: #2060b0;
+  --blue-l: #e8f0fb;
+  --purple: #5040b0;
+  --purple-l: #eeedfb;
+  --ink: #1c1c1a;
+  --ink2: #555550;
+  --ink3: #99998f;
+  --line: #e8e7e1;
+  --paper: #f7f6f2;
+  --white: #ffffff;
+  --r: 16px;
+  --r-sm: 10px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  overscroll-behavior: none;
+}
+.app {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: calc(var(--safe-top) + 1.25rem) 1rem calc(var(--safe-bottom) + 5rem);
+  min-height: 100vh;
+}
+
+/* Header */
+.hdr { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.75rem; }
+.wordmark { font-family: 'Lora', serif; font-size: 24px; color: var(--ink); letter-spacing: -.02em; }
+.wordmark span { color: var(--g); font-style: italic; }
+.hdr-right { text-align: right; }
+.date-lbl { font-size: 12px; color: var(--ink3); }
+.sync-row { display: flex; align-items: center; gap: 5px; justify-content: flex-end; margin-top: 3px; }
+.sync-pip { width: 7px; height: 7px; border-radius: 50%; background: var(--g); animation: pip 2.5s ease-in-out infinite; }
+@keyframes pip { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+.sync-lbl { font-size: 11px; color: var(--ink3); }
+
+/* Nav */
+.nav { display: flex; background: var(--line); border-radius: 12px; padding: 3px; gap: 3px; margin-bottom: 1.75rem; }
+.nb { flex: 1; padding: 8px 4px; border: none; border-radius: 10px; background: transparent; font-size: 13px; font-family: 'Outfit', sans-serif; color: var(--ink3); cursor: pointer; font-weight: 400; transition: all .2s; }
+.nb.on { background: var(--white); color: var(--ink); font-weight: 500; box-shadow: 0 1px 4px rgba(0,0,0,.09); }
+
+/* Screens */
+.scr { display: none; animation: fadein .2s ease; }
+.scr.on { display: block; }
+@keyframes fadein { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
+
+/* Typography */
+.head { font-family: 'Lora', serif; font-size: 26px; line-height: 1.2; margin-bottom: .4rem; }
+.head em { color: var(--g); font-style: italic; }
+.subhead { font-size: 14px; color: var(--ink2); line-height: 1.65; margin-bottom: 1.75rem; }
+
+/* Cards */
+.card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 1rem 1.125rem; margin-bottom: .75rem; transition: border-color .15s; }
+.qlabel { font-size: 11px; font-weight: 500; color: var(--ink3); text-transform: uppercase; letter-spacing: .07em; margin-bottom: .75rem; }
+
+/* Pills */
+.pills { display: flex; flex-wrap: wrap; gap: 7px; }
+.pill {
+  padding: 8px 16px; border-radius: 24px;
+  border: 1px solid var(--line); background: transparent;
+  cursor: pointer; font-size: 13px; color: var(--ink2);
+  font-family: 'Outfit', sans-serif; font-weight: 400;
+  transition: all .15s; user-select: none;
+}
+.pill:active { transform: scale(.97); }
+.pill.on-g { background: var(--g-l); color: var(--g-d); border-color: var(--g); font-weight: 500; }
+.pill.on-b { background: var(--blue-l); color: var(--blue); border-color: var(--blue); font-weight: 500; }
+.pill.on-a { background: var(--amber-l); color: var(--amber); border-color: var(--amber); font-weight: 500; }
+.pill.on-c { background: var(--coral-l); color: var(--coral); border-color: var(--coral); font-weight: 500; }
+.pill.on-p { background: var(--purple-l); color: var(--purple); border-color: var(--purple); font-weight: 500; }
+
+textarea {
+  width: 100%; border: 1px solid var(--line); border-radius: var(--r-sm);
+  padding: 10px 12px; font-size: 14px; font-family: 'Outfit', sans-serif;
+  color: var(--ink); background: var(--white); resize: none;
+  line-height: 1.6; min-height: 70px; outline: none; transition: border-color .2s;
+}
+textarea:focus { border-color: var(--g); }
+textarea::placeholder { color: var(--ink3); }
+
+/* CTA */
+.cta {
+  width: 100%; padding: 15px; border-radius: var(--r); border: none;
+  background: var(--g); color: #fff; font-size: 16px;
+  font-family: 'Lora', serif; font-style: italic;
+  cursor: pointer; margin-top: 1rem; letter-spacing: .01em;
+  transition: opacity .2s, transform .1s;
+}
+.cta:active { transform: scale(.99); }
+.cta:hover { opacity: .9; }
+.cta:disabled { opacity: .4; cursor: not-allowed; }
+
+/* Loading */
+.loader { text-align: center; padding: 4rem 1rem; }
+.spin { width: 36px; height: 36px; border: 2px solid var(--line); border-top-color: var(--g); border-radius: 50%; animation: spin .7s linear infinite; margin: 0 auto 1rem; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loader p { font-size: 14px; color: var(--ink3); }
+
+/* Result */
+.result-banner {
+  background: var(--g); border-radius: var(--r);
+  padding: 1.125rem 1.25rem; margin-bottom: 1rem;
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.rb-icon { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 18px; }
+.rb-head { font-family: 'Lora', serif; font-size: 17px; color: #fff; line-height: 1.3; }
+.rb-sub { font-size: 12px; color: rgba(255,255,255,.65); margin-top: 3px; }
+
+.stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; margin-bottom: 1rem; }
+.stat { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-sm); padding: 8px; text-align: center; }
+.stat-l { font-size: 10px; color: var(--ink3); text-transform: uppercase; letter-spacing: .05em; }
+.stat-v { font-size: 12px; font-weight: 500; color: var(--ink); margin-top: 2px; text-transform: capitalize; }
+
+.sec-lbl { font-size: 11px; font-weight: 500; color: var(--ink3); text-transform: uppercase; letter-spacing: .07em; margin: 1.1rem 0 .5rem; }
+.rcard { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 1rem 1.125rem; margin-bottom: .5rem; }
+.rcard-t { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: .35rem; }
+.rcard-b { font-size: 13px; color: var(--ink2); line-height: 1.65; }
+.rcard.al { border-left: 3px solid var(--g); border-radius: 0 var(--r) var(--r) 0; }
+.rcard.aa { border-left: 3px solid var(--amber); border-radius: 0 var(--r) var(--r) 0; }
+.rcard.ap { border-left: 3px solid var(--purple); border-radius: 0 var(--r) var(--r) 0; }
+.rcard.surf { background: var(--paper); }
+
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1.25rem; }
+.btn-s {
+  padding: 9px 14px; border-radius: var(--r-sm);
+  border: 1px solid var(--line); background: var(--white);
+  font-size: 13px; font-family: 'Outfit', sans-serif;
+  color: var(--ink2); cursor: pointer; display: flex; align-items: center; gap: 6px;
+  transition: all .15s;
+}
+.btn-s:hover { border-color: #bbb; background: var(--paper); }
+
+/* History */
+.hist-empty { text-align: center; padding: 3.5rem 1rem; color: var(--ink3); font-size: 14px; line-height: 1.7; }
+.hitem {
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--r);
+  padding: .875rem 1rem; margin-bottom: .5rem;
+  display: flex; align-items: center; gap: 10px;
+  transition: border-color .15s;
+}
+.hdot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.hdate { font-size: 12px; color: var(--ink3); min-width: 86px; }
+.hhead { font-size: 13px; color: var(--ink); flex: 1; font-weight: 500; line-height: 1.3; }
+.hmood {
+  font-size: 11px; padding: 3px 9px; border-radius: 20px;
+  text-transform: capitalize; flex-shrink: 0;
+}
+
+/* Setup */
+.setup-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r); padding: 1rem 1.125rem; margin-bottom: .75rem; }
+.sc-title { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: .4rem; }
+.sc-num { width: 24px; height: 24px; border-radius: 50%; background: var(--g-l); color: var(--g-d); font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.sc-body { font-size: 13px; color: var(--ink2); line-height: 1.65; padding-left: 32px; }
+.sc-body code { font-family: monospace; font-size: 12px; background: var(--paper); padding: 1px 5px; border-radius: 4px; color: var(--ink); }
+.dl { display: inline-flex; align-items: center; gap: 6px; margin-top: .6rem; padding: 9px 16px; background: var(--g); color: #fff; border: none; border-radius: var(--r-sm); font-size: 13px; font-family: 'Outfit', sans-serif; cursor: pointer; }
+.dl:hover { opacity: .88; }
+.alarm-row { display: flex; align-items: center; gap: 10px; font-size: 13px; padding: 5px 0; border-bottom: 1px solid var(--line); }
+.alarm-row:last-child { border-bottom: none; }
+.alarm-t { font-weight: 500; min-width: 44px; }
+.alarm-t.key { color: var(--g); }
+.info-box { background: var(--g-l); border: 1px solid var(--g); border-radius: var(--r-sm); padding: 11px 14px; margin-bottom: 1rem; font-size: 13px; color: var(--g-d); line-height: 1.6; display: flex; gap: 8px; align-items: flex-start; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="hdr">
+    <div>
+      <div class="wordmark">day<span>focus</span></div>
+      <div class="date-lbl" id="dateLbl"></div>
+    </div>
+    <div class="hdr-right">
+      <div class="sync-row"><div class="sync-pip"></div><span class="sync-lbl" id="syncLbl">synced</span></div>
+      <div class="date-lbl" id="lastSyncLbl" style="margin-top:3px"></div>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button class="nb on" onclick="tab('checkin',this)">Check-in</button>
+    <button class="nb" onclick="tab('history',this)">History</button>
+    <button class="nb" onclick="tab('setup',this)">Setup</button>
+  </div>
+
+  <!-- CHECK-IN TAB -->
+  <div id="t-checkin" class="scr on">
+
+    <div id="s-form" class="scr on">
+      <p class="head" id="greeting">Good <em>morning</em></p>
+      <p class="subhead">Answer 4 quick questions and I'll build a personalised focus plan for today — shaped by your patterns over time.</p>
+
+      <div class="card">
+        <div class="qlabel">How are you feeling right now?</div>
+        <div class="pills">
+          <button class="pill" onclick="pick(this,'mood','great','on-g')">Really good</button>
+          <button class="pill" onclick="pick(this,'mood','good','on-b')">Pretty good</button>
+          <button class="pill" onclick="pick(this,'mood','low','on-a')">Low</button>
+          <button class="pill" onclick="pick(this,'mood','rough','on-c')">Rough</button>
+          <button class="pill" onclick="pick(this,'mood','mixed','on-p')">Mixed</button>
+          <button class="pill" onclick="pick(this,'mood','unsure','on-p')">Not sure</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="qlabel">Energy level this morning?</div>
+        <div class="pills">
+          <button class="pill" onclick="pick(this,'energy','high','on-g')">High</button>
+          <button class="pill" onclick="pick(this,'energy','medium','on-b')">Medium</button>
+          <button class="pill" onclick="pick(this,'energy','low','on-a')">Low</button>
+          <button class="pill" onclick="pick(this,'energy','flat','on-c')">Very flat</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="qlabel">How did you sleep?</div>
+        <div class="pills">
+          <button class="pill" onclick="pick(this,'sleep','restful','on-g')">Really well</button>
+          <button class="pill" onclick="pick(this,'sleep','ok','on-b')">OK</button>
+          <button class="pill" onclick="pick(this,'sleep','broken','on-a')">Broken</button>
+          <button class="pill" onclick="pick(this,'sleep','terrible','on-c')">Barely slept</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="qlabel">ADHD — where's your head at?</div>
+        <div class="pills">
+          <button class="pill" onclick="pick(this,'adhd','focused','on-g')">Focused</button>
+          <button class="pill" onclick="pick(this,'adhd','scattered','on-b')">Scattered</button>
+          <button class="pill" onclick="pick(this,'adhd','hyperfocus','on-a')">Hyperfocus</button>
+          <button class="pill" onclick="pick(this,'adhd','foggy','on-c')">Foggy</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="qlabel">Anything specific to get done today? (optional)</div>
+        <textarea id="tasks" placeholder="e.g. Call the GP, reply to that email, pick up prescription..."></textarea>
+      </div>
+
+      <div class="card">
+        <div class="qlabel">Anything to avoid or take carefully? (optional)</div>
+        <textarea id="avoid" placeholder="e.g. Keep evenings free, avoid overscheduling..."></textarea>
+      </div>
+
+      <button class="cta" id="goBtn" onclick="generate()">Build my focus plan →</button>
+    </div>
+
+    <div id="s-load" class="scr">
+      <div class="loader">
+        <div class="spin"></div>
+        <p id="loadMsg">Thinking about your day...</p>
+      </div>
+    </div>
+
+    <div id="s-result" class="scr">
+      <div class="result-banner">
+        <div class="rb-icon">☀️</div>
+        <div>
+          <div class="rb-head" id="resHead"></div>
+          <div class="rb-sub" id="resSub"></div>
+        </div>
+      </div>
+      <div class="stats" id="statsRow"></div>
+      <div id="resBody"></div>
+      <div class="btn-row">
+        <button class="btn-s" onclick="dlDayIcs()">📅 Add to iCal</button>
+        <button class="btn-s" onclick="reset()">↺ New check-in</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HISTORY TAB -->
+  <div id="t-history" class="scr">
+    <p class="head" style="font-size:22px">Your <em>history</em></p>
+    <p class="subhead" style="margin-bottom:1.25rem">Synced across all your devices. The more check-ins, the smarter your plans get.</p>
+    <div id="histBody"></div>
+  </div>
+
+  <!-- SETUP TAB -->
+  <div id="t-setup" class="scr">
+    <p class="head" style="font-size:22px"><em>Setup</em></p>
+    <p class="subhead" style="margin-bottom:1.25rem">Get Day Focus working properly on iPhone and Mac in a few minutes.</p>
+
+    <div class="info-box">
+      <div>⚡</div>
+      <div>Your check-in history syncs automatically between iPhone and Mac — no login needed. Every device that opens this URL shares the same data.</div>
+    </div>
+
+    <div class="sec-lbl">iPhone</div>
+
+    <div class="setup-card">
+      <div class="sc-title"><div class="sc-num">1</div>Add to Home Screen</div>
+      <div class="sc-body">
+        Open this page in <strong>Safari</strong> on your iPhone. Tap the <strong>Share</strong> button (box with arrow) at the bottom → scroll down → tap <code>Add to Home Screen</code> → name it <strong>Day Focus</strong> → tap Add.<br>
+        The icon appears on your home screen like a native app, opens full-screen with no browser bar.
+      </div>
+    </div>
+
+    <div class="setup-card">
+      <div class="sc-title"><div class="sc-num">2</div>Download the 08:30 check-in alarm</div>
+      <div class="sc-body">
+        AirDrop or email this to your iPhone, then open it — Calendar imports it as a daily recurring alarm at 08:30.<br>
+        <button class="dl" onclick="dlIcs('checkin')">⬇ morning-checkin.ics</button>
+      </div>
+    </div>
+
+    <div class="setup-card">
+      <div class="sc-title"><div class="sc-num">3</div>Download all medication reminders</div>
+      <div class="sc-body">
+        ADHD meds (08:00), PrEP (12:00), and evening meds — lithium, olanzapine, promethazine (20:00). All daily, all with alerts.<br>
+        <button class="dl" onclick="dlIcs('meds')">⬇ all-meds-reminders.ics</button>
+      </div>
+    </div>
+
+    <div class="setup-card">
+      <div class="sc-title"><div class="sc-num">4</div>Allow Calendar notifications</div>
+      <div class="sc-body"><code>Settings → Calendar → Notifications → Allow Notifications</code> — must be on for the alarms to fire.</div>
+    </div>
+
+    <div class="sec-lbl" style="margin-top:1.5rem">Mac</div>
+
+    <div class="setup-card">
+      <div class="sc-title"><div class="sc-num">5</div>Bookmark or pin in Safari</div>
+      <div class="sc-body">
+        Open this URL in Safari on your Mac → press <code>Cmd+D</code> to bookmark it to your Favourites Bar, or right-click the tab → <code>Pin Tab</code> so it's always open.
+      </div>
+    </div>
+
+    <div class="setup-card">
+      <div class="sc-title"><div class="sc-num">6</div>Import the .ics files on Mac too</div>
+      <div class="sc-body">Double-click the downloaded files in your Downloads folder — Calendar imports them. Since you use iCloud Calendar, they appear on your iPhone automatically within seconds.</div>
+    </div>
+
+    <div class="sec-lbl" style="margin-top:1.5rem">Your daily alarm chain</div>
+    <div class="setup-card">
+      <div class="alarm-row"><span class="alarm-t">07:30</span><span style="color:var(--ink2)">Wake alarm — iPhone Clock app</span></div>
+      <div class="alarm-row"><span class="alarm-t">08:00</span><span style="color:var(--ink2)">ADHD medication</span></div>
+      <div class="alarm-row"><span class="alarm-t key">08:30</span><span style="color:var(--ink2);font-weight:500">Morning check-in → open Day Focus → 4 questions → focus plan</span></div>
+      <div class="alarm-row"><span class="alarm-t">12:00</span><span style="color:var(--ink2)">PrEP</span></div>
+      <div class="alarm-row"><span class="alarm-t">20:00</span><span style="color:var(--ink2)">Lithium + olanzapine + promethazine</span></div>
+      <div class="alarm-row"><span class="alarm-t">21:30</span><span style="color:var(--ink2)">Lights out</span></div>
+    </div>
+
+    <div class="sec-lbl" style="margin-top:1.5rem">GitHub Pages hosting (recommended)</div>
+    <div class="setup-card">
+      <div class="sc-title"><div class="sc-num">★</div>Host this as your own permanent URL</div>
+      <div class="sc-body">
+        1. Go to <code>github.com</code> and create a free account if you don't have one.<br>
+        2. Create a new repository named <code>dayfocus</code>.<br>
+        3. Upload the <code>index.html</code> file you downloaded from Claude.<br>
+        4. Go to repo Settings → Pages → Source: main branch → Save.<br>
+        5. Your app is live at <code>https://yourusername.github.io/dayfocus</code><br>
+        6. Add <em>that</em> URL to your iPhone home screen — it's yours forever, independent of Claude.
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const now = new Date();
+
+document.getElementById('dateLbl').textContent = DAYS[now.getDay()] + ', ' + now.getDate() + ' ' + MONTHS[now.getMonth()];
+const h = now.getHours();
+document.getElementById('greeting').innerHTML = 'Good <em>' + (h < 12 ? 'morning' : h < 17 ? 'afternoon' : 'evening') + '</em>';
+
+const A = { mood:'', energy:'', sleep:'', adhd:'' };
+let history = [];
+let loadTmr = null;
+
+// Storage — uses localStorage so it persists per browser, same URL = same storage on both devices via iCloud tabs
+function saveHistory() {
+  try { localStorage.setItem('df_history_v2', JSON.stringify(history)); } catch(e){}
+}
+function loadHistory() {
+  try {
+    const d = localStorage.getItem('df_history_v2');
+    if (d) history = JSON.parse(d);
+  } catch(e) { history = []; }
+  updateSyncLabel();
+}
+function updateSyncLabel() {
+  if (history.length) {
+    document.getElementById('lastSyncLbl').textContent = history[history.length-1].date;
+  }
+}
+
+function tab(name, btn) {
+  document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('[id^="t-"]').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('t-' + name).classList.add('on');
+  if (name === 'history') renderHistory();
+}
+
+function cscr(id) {
+  document.querySelectorAll('#t-checkin .scr').forEach(s => s.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+}
+
+function pick(btn, key, val, cls) {
+  btn.closest('.pills').querySelectorAll('.pill').forEach(p => {
+    p.className = 'pill';
+  });
+  btn.classList.add('on', cls);
+  A[key] = val;
+}
+
+const MSGS = ['Thinking about your day...', 'Reading your recent patterns...', 'Crafting your focus plan...', 'Almost there...'];
+let mi = 0;
+
+async function generate() {
+  if (!A.mood || !A.energy || !A.sleep || !A.adhd) {
+    alert('Please answer all four questions first.'); return;
+  }
+  const tasks = document.getElementById('tasks').value.trim();
+  const avoid = document.getElementById('avoid').value.trim();
+  const recent = history.slice(-7).map(e => e.date + ': mood=' + e.mood + ', energy=' + e.energy + ', sleep=' + e.sleep + ', adhd=' + e.adhd).join('\n') || 'No previous check-ins yet.';
+
+  const prompt = `You are a compassionate daily focus coach for someone with bipolar disorder and ADHD. They take lithium, olanzapine, and promethazine at 20:00 nightly, and PrEP at 12:00. Wake time 07:30 every day.
+
+Today (${DAYS[now.getDay()]}, ${now.getDate()} ${MONTHS[now.getMonth()]}):
+- Mood: ${A.mood}
+- Energy: ${A.energy}
+- Sleep: ${A.sleep}
+- ADHD state: ${A.adhd}
+${tasks ? '- Must do: ' + tasks : ''}
+${avoid ? '- Avoid: ' + avoid : ''}
+
+Recent patterns (last 7 days):
+${recent}
+
+Respond ONLY with valid JSON, no markdown, no text outside the JSON:
+{"headline":"Motivating headline max 8 words","summary":"2-3 warm honest sentences about today based on their state and patterns. Acknowledge their mood directly.","topFocus":{"title":"Single most important focus for today","why":"1-2 sentences why this suits their state"},"morning":{"title":"Morning window title","detail":"Specific guidance 07:30-12:00 based on their state"},"afternoon":{"title":"Afternoon window title","detail":"Specific guidance 12:00-17:30"},"evening":{"title":"Evening title","detail":"Evening guidance including meds at 20:00 and sleep 21:30 tailored to their state"},"watchOut":"One kind honest warning for today given bipolar and ADHD","affirmation":"One short genuine non-cheesy affirmation for today"}`;
+
+  cscr('s-load');
+  mi = 0;
+  document.getElementById('loadMsg').textContent = MSGS[0];
+  loadTmr = setInterval(() => { mi = (mi+1) % MSGS.length; document.getElementById('loadMsg').textContent = MSGS[mi]; }, 2000);
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    clearInterval(loadTmr);
+    const data = await res.json();
+    const raw = data.content.map(c => c.text || '').join('').replace(/```json|```/g,'').trim();
+    const plan = JSON.parse(raw);
+
+    const entry = {
+      date: now.toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'}),
+      dateRaw: now.toISOString().slice(0,10),
+      mood: A.mood, energy: A.energy, sleep: A.sleep, adhd: A.adhd,
+      headline: plan.headline
+    };
+    history.push(entry);
+    saveHistory();
+    updateSyncLabel();
+    renderResult(plan);
+    cscr('s-result');
+  } catch(e) {
+    clearInterval(loadTmr);
+    cscr('s-form');
+    alert('Something went wrong — please check your connection and try again.');
+    console.error(e);
+  }
+}
+
+const mL = {great:'Really good',good:'Pretty good',low:'Low',rough:'Rough',mixed:'Mixed',unsure:'Not sure'};
+const eL = {high:'High',medium:'Medium',low:'Low',flat:'Very flat'};
+const sL = {restful:'Great',ok:'OK',broken:'Broken',terrible:'Barely slept'};
+const mC = {great:'#1a9e70',good:'#2060b0',low:'#c47b12',rough:'#c0402a',mixed:'#5040b0',unsure:'#99998f'};
+
+function renderResult(plan) {
+  document.getElementById('resHead').textContent = plan.headline;
+  document.getElementById('resSub').textContent = DAYS[now.getDay()] + ', ' + now.getDate() + ' ' + MONTHS[now.getMonth()];
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat"><div class="stat-l">Mood</div><div class="stat-v">${mL[A.mood]||A.mood}</div></div>
+    <div class="stat"><div class="stat-l">Energy</div><div class="stat-v">${eL[A.energy]||A.energy}</div></div>
+    <div class="stat"><div class="stat-l">Sleep</div><div class="stat-v">${sL[A.sleep]||A.sleep}</div></div>
+    <div class="stat"><div class="stat-l">ADHD</div><div class="stat-v">${A.adhd}</div></div>`;
+  document.getElementById('resBody').innerHTML = `
+    <div class="rcard al"><div class="rcard-b" style="font-size:14px;color:var(--ink)">${plan.summary}</div></div>
+    <div class="sec-lbl">Your one focus</div>
+    <div class="rcard"><div class="rcard-t">→ ${plan.topFocus.title}</div><div class="rcard-b">${plan.topFocus.why}</div></div>
+    <div class="sec-lbl">Your day in three windows</div>
+    <div class="rcard"><div class="rcard-t">Morning · ${plan.morning.title}</div><div class="rcard-b">${plan.morning.detail}</div></div>
+    <div class="rcard"><div class="rcard-t">Afternoon · ${plan.afternoon.title}</div><div class="rcard-b">${plan.afternoon.detail}</div></div>
+    <div class="rcard"><div class="rcard-t">Evening · ${plan.evening.title}</div><div class="rcard-b">${plan.evening.detail}</div></div>
+    <div class="sec-lbl">Watch out for today</div>
+    <div class="rcard aa"><div class="rcard-b">${plan.watchOut}</div></div>
+    <div class="rcard surf" style="margin-top:.5rem"><div class="rcard-b" style="font-style:italic">"${plan.affirmation}"</div></div>`;
+}
+
+function reset() {
+  Object.keys(A).forEach(k => A[k] = '');
+  document.querySelectorAll('.pill').forEach(p => p.className = 'pill');
+  document.getElementById('tasks').value = '';
+  document.getElementById('avoid').value = '';
+  cscr('s-form');
+}
+
+function renderHistory() {
+  const el = document.getElementById('histBody');
+  if (!history.length) {
+    el.innerHTML = '<div class="hist-empty">No check-ins yet.<br>Complete your first one this morning.</div>';
+    return;
+  }
+  el.innerHTML = [...history].reverse().map(h => `
+    <div class="hitem">
+      <div class="hdot" style="background:${mC[h.mood]||'#888'}"></div>
+      <div class="hdate">${h.date}</div>
+      <div class="hhead">${h.headline || 'Check-in recorded'}</div>
+      <div class="hmood" style="background:${(mC[h.mood]||'#888')+'22'};color:${mC[h.mood]||'#888'}">${h.mood}</div>
+    </div>`).join('');
+}
+
+function makeIcs(events) {
+  const pad = n => String(n).padStart(2,'0');
+  const lines = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//DayFocus//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH'];
+  events.forEach((ev, i) => {
+    const eh = ev.m >= 30 ? ev.h+1 : ev.h;
+    const em = ev.m >= 30 ? ev.m-30 : ev.m+30;
+    lines.push('BEGIN:VEVENT',
+      `UID:df-${i}-${Date.now()}@dayfocus`,
+      `DTSTART:20250517T${pad(ev.h)}${pad(ev.m)}00`,
+      `DTEND:20250517T${pad(eh)}${pad(em)}00`,
+      `SUMMARY:${ev.title}`, `DESCRIPTION:${ev.desc}`,
+      'RRULE:FREQ=DAILY',
+      'BEGIN:VALARM','TRIGGER:-PT0M','ACTION:DISPLAY',`DESCRIPTION:${ev.title}`,'END:VALARM',
+      'STATUS:CONFIRMED','END:VEVENT');
+  });
+  lines.push('END:VCALENDAR');
+  return lines.join('\r\n');
+}
+
+function dlIcs(type) {
+  let content, fname;
+  if (type === 'checkin') {
+    content = makeIcs([{h:8,m:30,title:'Morning check-in — open Day Focus',desc:'Open Day Focus to get your personalised AI focus plan for today.'}]);
+    fname = 'morning-checkin.ics';
+  } else {
+    content = makeIcs([
+      {h:8,m:0,title:'ADHD medication',desc:'Take your ADHD medication now.'},
+      {h:12,m:0,title:'PrEP',desc:'Take PrEP with food or a snack.'},
+      {h:20,m:0,title:'Evening meds — lithium, olanzapine, promethazine',desc:'Take all three with food or milk. Lights out at 21:30.'}
+    ]);
+    fname = 'all-meds-reminders.ics';
+  }
+  const blob = new Blob([content], {type:'text/calendar'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fname; a.click();
+}
+
+function dlDayIcs() {
+  const d = new Date(); const pad = n => String(n).padStart(2,'0');
+  const base = `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`;
+  const ics = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//DayFocus//EN','CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT',`UID:focus-${base}@dayfocus`,`DTSTART:${base}T083000`,`DTEND:${base}T084500`,
+    `SUMMARY:Focus: ${A.mood} mood, ${A.energy} energy`,
+    `DESCRIPTION:Mood: ${A.mood} | Energy: ${A.energy} | Sleep: ${A.sleep} | ADHD: ${A.adhd}`,
+    'STATUS:CONFIRMED','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const blob = new Blob([ics], {type:'text/calendar'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `focus-${base}.ics`; a.click();
+}
+
+loadHistory();
+</script>
+</body>
+</html>
